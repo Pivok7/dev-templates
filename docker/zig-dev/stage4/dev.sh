@@ -1,0 +1,4 @@
+#!/bin/sh
+
+docker run -it --name zig-dev-stage4 zig-dev-stage4
+docker rm zig-dev-stage4
