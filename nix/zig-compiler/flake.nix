@@ -20,6 +20,9 @@
           packages = with pkgs; [
             cmake
             ninja
+
+            qemu
+            wasmtime
           ];
 
           buildInputs = with pkgs; [
