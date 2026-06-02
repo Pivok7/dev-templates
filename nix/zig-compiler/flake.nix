@@ -22,11 +22,13 @@
             ninja
           ];
 
-          buildInputs = with pkgs.llvmPackages_22; [
-            llvm
-            clang
-            libclang
-            lld
+          buildInputs = with pkgs; [
+            llvmPackages_22.llvm
+            llvmPackages_22.clang
+            llvmPackages_22.libclang
+            llvmPackages_22.lld
+            libxml2
+            stdenv.cc.cc.lib
           ];
 
           LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath buildInputs;
