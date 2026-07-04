@@ -1,0 +1,7 @@
+services:
+  server:
+    build:
+      context: .
+    container_name: pivoxel-server
+    ports:
+      - "2137:2137/udp"
