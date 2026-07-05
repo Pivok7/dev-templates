@@ -6,7 +6,7 @@ RUN apk add \
 
 WORKDIR /app
 
-RUN git clone --depth=1 https://codeberg.org/Pivok/PiVoxel
+RUN git clone --depth=1 https://codeberg.org/Pivok/PiVoxel --revision=5bed85d21c5e55037cb058ee4c72921966b646ad
 WORKDIR /app/PiVoxel
 
 RUN zig build server -Doptimize=ReleaseSafe
