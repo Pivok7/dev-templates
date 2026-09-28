@@ -1,18 +1,27 @@
 [project]
-name = "python-app"
+name = "hello"
 version = "0.1.0"
-
-requires-python  = ">= 3.8"
+description = "Add your description here"
+requires-python = ">=3.13"
 dependencies = [
-    "numpy >= 2.0.0"
+    "matplotlib>=3.11.2",
+    "numpy>=2.5.3",
+    "opencv-python>=5.0.0.93",
+    "pandas>=3.0.6",
+    "scipy>=1.18.1",
+    "torch>=2.11.0",
+    "torchvision>=0.26.0",
 ]
 
-[tool.setuptools]
-packages = ["python_app"]
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cpu" },
+]
+torchvision = [
+    { index = "pytorch-cpu" },
+]
 
-[build-system]
-requires = ["setuptools >= 70.0.0"]
-build-backend = "setuptools.build_meta"
-
-[project.scripts]
-python-app = "python_app.main:main"
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

@@ -1,62 +1,37 @@
 {
-  description = "Python flake";
-
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs =
     {
       nixpkgs,
+      flake-utils,
       ...
     }:
-    let
-      forEachSystem =
-        f:
-        nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed (
-          system:
-          f {
-            pkgs = import nixpkgs { inherit system; };
-          }
-        );
-    in
-    {
-      devShells = forEachSystem (
-        { pkgs }:
-        {
-          default = pkgs.mkShell {
-            packages = (
-              with pkgs;
-              [
-                python3
-                python3Packages.numpy
-              ]
-            );
-          };
-        }
-      );
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = import nixpkgs { inherit system; };
+      in
+      {
+        devShells.default = pkgs.mkShell rec {
+          nativeBuildInputs = with pkgs; [
+            python3
+            uv
+          ];
 
-      packages = forEachSystem (
-        { pkgs }:
-        {
-          default = pkgs.python3Packages.buildPythonApplication {
-            pname = "python-app";
-            version = "0.1.0";
+          buildInputs = with pkgs; [
+            stdenv.cc.cc.lib
+            zlib
+            libxcb
+            libGL
+            glib
+          ];
 
-            pyproject = true;
-
-            src = ./.;
-
-            build-system = with pkgs.python3Packages; [
-              setuptools
-              wheel
-            ];
-
-            propagatedBuildInputs = with pkgs.python3Packages; [
-              numpy
-            ];
-          };
-        }
-      );
-    };
+          LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath buildInputs}";
+        };
+      }
+    );
 }
