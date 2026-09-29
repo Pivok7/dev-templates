@@ -19,6 +19,7 @@
         devShells.default = pkgs.mkShell rec {
           nativeBuildInputs = with pkgs; [
             python3
+            python3Packages.tkinter
             uv
           ];
 
