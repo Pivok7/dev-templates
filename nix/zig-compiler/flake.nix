@@ -31,13 +31,12 @@
             llvmPackages_23.libclang
             llvmPackages_23.lld
             libxml2
-            stdenv.cc.cc.lib
           ];
 
           LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath buildInputs;
 
           shellHook = "
-            echo 'cmake .. -GNinja -DZIG_NO_LIB=ON -DCMAKE_BUILD_TYPE=Release; ninja';
+            echo 'cmake .. -GNinja -DZIG_NO_LIB=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++; ninja';
           ";
         };
       }
