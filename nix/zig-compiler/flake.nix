@@ -26,10 +26,10 @@
           ];
 
           buildInputs = with pkgs; [
-            llvmPackages_22.llvm
-            llvmPackages_22.clang
-            llvmPackages_22.libclang
-            llvmPackages_22.lld
+            llvmPackages_23.llvm
+            llvmPackages_23.clang
+            llvmPackages_23.libclang
+            llvmPackages_23.lld
             libxml2
             stdenv.cc.cc.lib
           ];
