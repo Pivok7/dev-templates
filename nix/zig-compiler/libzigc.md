@@ -1,14 +1,6 @@
 ## Cmake command in flake
 
-Build:
-```
-mkdir build
-cd build
-<Cmake command>
-ninja
-
-stage3/bin/zig build -p stage4 -Denable-llvm -Dno-lib
-```
+Use zig-bootstrap
 
 ## Edit
 
